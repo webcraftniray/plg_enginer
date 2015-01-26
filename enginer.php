@@ -16,9 +16,11 @@ class plgSystemEnginer extends JPlugin
 
     public function onAfterInitialise()
     {
+        //init vars
         $engine = $this->params->get('engine');
         $opposite = $this->_getOpposite($engine);
 
+        //set database query
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select('TABLE_NAME');
@@ -39,7 +41,7 @@ class plgSystemEnginer extends JPlugin
 
         if (!empty($results))
         {
-
+            //cycle through tables and reset the Engine
             foreach ($results as $result)
             {
                 $tableName = $result->TABLE_NAME;
@@ -56,7 +58,9 @@ class plgSystemEnginer extends JPlugin
             }
         }
     }
-
+    
+    
+    //helps set init vars
     protected function _getOpposite($engine)
     {
         if ($engine == 'MyISAM')
